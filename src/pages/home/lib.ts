@@ -20,7 +20,7 @@ const getAllTiles = () => {
       source: PERSON_PNG,
       title: "Персонажи",
       size: "180px",
-      navigationKey: "",
+      navigationKey: STACK_PAGE_NAMES.home.persons.main,
     },
     {
       source: STARSHIP_PNG,
