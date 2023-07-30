@@ -9,20 +9,20 @@ import {
 } from "react-native";
 import { styled } from "styled-components/native";
 
-import { FilmCard, filmsApi } from "@/entities/film";
+import { PersonCard, personsApi } from "@/entities/person";
 import { STACK_PAGE_NAMES } from "@/shared/config";
 import { SpinnerBox } from "@/shared/ui/spinner-box";
 
-const FilmRoot = styled.View`
+const PersonRoot = styled.View`
   flex: 1;
 `;
 
-const FilmsScreen = () => {
+const PersonsScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<Record<string, { id: number }>>>();
 
   const { isLoading, data, hasNextPage, fetchNextPage, isFetchingNextPage, refetch } =
-    filmsApi.useInfiniteFilms();
+    personsApi.useInfinitePersons();
 
   const loadMore = () => {
     if (hasNextPage) {
@@ -30,7 +30,7 @@ const FilmsScreen = () => {
     }
   };
 
-  const itemExtractorKey = (item: filmsApi.Film) => {
+  const itemExtractorKey = (item: personsApi.Person) => {
     return item.url;
   };
 
@@ -43,21 +43,24 @@ const FilmsScreen = () => {
   }
 
   return (
-    <FilmRoot>
+    <PersonRoot>
       <FlatList
         style={{ gap: 10 }}
         refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refetch} />}
         data={data?.pages.map((page) => page.results).flat()}
         keyExtractor={itemExtractorKey}
-        renderItem={(data) => (
+        renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate(STACK_PAGE_NAMES.home.films.detail, {
-                id: data.item.episode_id,
-              })
-            }
+            onPress={() => {
+              const trimedUrl = item.url.slice(0, item.url.length - 1);
+              const stringId = trimedUrl.slice(trimedUrl.lastIndexOf("/") + 1);
+
+              navigation.navigate(STACK_PAGE_NAMES.home.persons.detail, {
+                id: Number(stringId),
+              });
+            }}
           >
-            <FilmCard film={data.item} />
+            <PersonCard person={item} />
           </TouchableOpacity>
         )}
         onEndReached={loadMore}
@@ -65,8 +68,8 @@ const FilmsScreen = () => {
         ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
         ListFooterComponent={isFetchingNextPage ? renderSpinner : null}
       />
-    </FilmRoot>
+    </PersonRoot>
   );
 };
 
-export { FilmsScreen };
+export { PersonsScreen };

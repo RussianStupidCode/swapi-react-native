@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Alert, ScrollView } from "react-native";
 import { useQuery } from "react-query";
 
-import { FilmDetailCard, filmsApi } from "@/enttities/film";
+import { FilmDetailCard, filmsApi } from "@/entities/film";
 import { SpinnerBox } from "@/shared/ui/spinner-box";
 
 interface FilmDetailProps {

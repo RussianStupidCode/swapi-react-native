@@ -29,9 +29,9 @@ const getFilms = async ({
 const getFilmById = async ({ id }: { id: number }): Promise<Film> => {
   const url = `${BASE_URL}/${id}`;
 
-  const response = apiClient.get(url);
+  const response = await apiClient.get(url);
 
-  return (await response).data;
+  return response.data;
 };
 
 const useInfiniteFilms = createUseInfiniteApiResponse("films", getFilms);

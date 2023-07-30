@@ -10,6 +10,11 @@ export const STACK_PAGE_NAMES = {
       list: "FILM_LIST",
       detail: "FILM_DETAIL",
     },
+    persons: {
+      main: "PERSON_MAIN",
+      list: "PERSON_LIST",
+      detail: "PERSON_DETAIL",
+    },
   },
 } as const;
 
