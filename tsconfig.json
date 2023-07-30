@@ -12,6 +12,6 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "src/pages/home/Tile.tsx"
+    "src/pages/home/ui/Tile.tsx"
   ]
 }

@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
   ActivityIndicator,
   FlatList,
@@ -8,6 +10,7 @@ import {
 import { styled } from "styled-components/native";
 
 import { FilmCard, filmsApi } from "@/enttities/film";
+import { STACK_PAGE_NAMES } from "@/shared/config";
 import { SpinnerBox } from "@/shared/ui/spinner-box";
 
 const FilmRoot = styled.View`
@@ -15,6 +18,9 @@ const FilmRoot = styled.View`
 `;
 
 const FilmsScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<Record<string, { id: number }>>>();
+
   const { isLoading, data, hasNextPage, fetchNextPage, isFetchingNextPage, refetch } =
     filmsApi.useInfiniteFilms();
 
@@ -44,7 +50,13 @@ const FilmsScreen = () => {
         data={data?.pages.map((page) => page.results).flat()}
         keyExtractor={itemExtractorKey}
         renderItem={(data) => (
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate(STACK_PAGE_NAMES.home.films.detail, {
+                id: data.item.episode_id,
+              })
+            }
+          >
             <FilmCard film={data.item} />
           </TouchableOpacity>
         )}

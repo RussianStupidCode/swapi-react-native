@@ -1,2 +1,2 @@
-import { HomeScreen } from "./HomeScreen";
+import { HomeScreen } from "./ui/HomeScreen";
 export { HomeScreen };

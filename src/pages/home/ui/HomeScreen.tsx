@@ -1,8 +1,9 @@
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ScrollView, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
-import { getAllTiles } from "./lib";
+import { getAllTiles } from "../lib";
 import { Tile } from "./Tile";
 
 const TilesView = styled.View`
@@ -15,9 +16,10 @@ const TilesView = styled.View`
   gap: 10px;
 `;
 
-const HomeScreen = ({
-  navigation,
-}: NativeStackScreenProps<Record<string, undefined>>) => {
+const HomeScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<Record<string, undefined>>>();
+
   const tiles = getAllTiles();
 
   return (
