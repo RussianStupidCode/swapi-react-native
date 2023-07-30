@@ -1,2 +1,2 @@
-import { FilmsScreen } from "./Films";
+import { FilmsScreen } from "./ui/Films";
 export { FilmsScreen };

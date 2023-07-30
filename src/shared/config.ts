@@ -8,6 +8,7 @@ export const STACK_PAGE_NAMES = {
     films: {
       main: "FILMS_MAIN",
       list: "FILM_LIST",
+      detail: "FILM_DETAIL",
     },
   },
 } as const;

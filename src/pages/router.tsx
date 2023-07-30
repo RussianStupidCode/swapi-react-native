@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { STACK_PAGE_NAMES, TAB_PAGE_NAMES } from "@/shared/config";
 
+import { FilmDetailScreen } from "./film-detail";
 import { FilmsScreen } from "./films";
 import { HomeScreen } from "./home";
 
@@ -12,14 +13,16 @@ const FilmsStack = createNativeStackNavigator<Record<string, undefined>>();
 
 const FilmsStackScreen = () => {
   return (
-    <FilmsStack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+    <FilmsStack.Navigator initialRouteName={STACK_PAGE_NAMES.home.films.list}>
       <FilmsStack.Screen
         name={STACK_PAGE_NAMES.home.films.list}
         component={FilmsScreen}
+        options={{ title: "Фильмы" }}
+      />
+      <FilmsStack.Screen
+        name={STACK_PAGE_NAMES.home.films.detail}
+        component={FilmDetailScreen}
+        options={{ title: "Фильм" }}
       />
     </FilmsStack.Navigator>
   );
@@ -37,6 +40,7 @@ const HomeStackScreen = () => {
       <HomeStack.Screen
         name={STACK_PAGE_NAMES.home.films.main}
         component={FilmsStackScreen}
+        options={{ title: "Фильмы", headerShown: false }}
       ></HomeStack.Screen>
     </HomeStack.Navigator>
   );
