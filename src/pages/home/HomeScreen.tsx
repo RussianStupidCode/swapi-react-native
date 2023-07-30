@@ -1,3 +1,4 @@
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ScrollView, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
@@ -14,7 +15,9 @@ const TilesView = styled.View`
   gap: 10px;
 `;
 
-const HomeScreen = () => {
+const HomeScreen = ({
+  navigation,
+}: NativeStackScreenProps<Record<string, undefined>>) => {
   const tiles = getAllTiles();
 
   return (
@@ -22,7 +25,10 @@ const HomeScreen = () => {
       <TilesView>
         {tiles.map((tile, index) => {
           return (
-            <TouchableOpacity key={index}>
+            <TouchableOpacity
+              key={index}
+              onPress={() => navigation.navigate(tile.navigationKey)}
+            >
               <Tile size={tile.size} source={tile.source} title={tile.title} />
             </TouchableOpacity>
           );
