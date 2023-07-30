@@ -1,10 +1,15 @@
-export const PAGE_NAMES = {
+export const TAB_PAGE_NAMES = {
   home: "HOME",
-  films: "FILMS",
-  starships: "STARSHIPS",
-  vehicles: "VEHICLES",
-  species: "SPECIES",
-  planets: "PLANETS",
 } as const;
 
-export const BASE_API_PATH = "http://swapi.dev/api";
+export const STACK_PAGE_NAMES = {
+  home: {
+    main: "MAIN",
+    films: {
+      main: "FILMS_MAIN",
+      list: "FILM_LIST",
+    },
+  },
+} as const;
+
+export const BASE_API_PATH = "https://swapi.dev/api";
